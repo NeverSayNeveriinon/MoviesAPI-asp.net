@@ -1,0 +1,17 @@
+C:\Visual Studio\Personal Projects\Movies\Entities\bin\Debug\net8.0\Entities.deps.json
+C:\Visual Studio\Personal Projects\Movies\Entities\bin\Debug\net8.0\Entities.runtimeconfig.json
+C:\Visual Studio\Personal Projects\Movies\Entities\bin\Debug\net8.0\Entities.dll
+C:\Visual Studio\Personal Projects\Movies\Entities\bin\Debug\net8.0\Entities.pdb
+C:\Visual Studio\Personal Projects\Movies\Entities\bin\Debug\net8.0\ServiceContracts.dll
+C:\Visual Studio\Personal Projects\Movies\Entities\bin\Debug\net8.0\ServiceContracts.pdb
+C:\Visual Studio\Personal Projects\Movies\Entities\obj\Debug\net8.0\Entities.csproj.AssemblyReference.cache
+C:\Visual Studio\Personal Projects\Movies\Entities\obj\Debug\net8.0\Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Visual Studio\Personal Projects\Movies\Entities\obj\Debug\net8.0\Entities.AssemblyInfoInputs.cache
+C:\Visual Studio\Personal Projects\Movies\Entities\obj\Debug\net8.0\Entities.AssemblyInfo.cs
+C:\Visual Studio\Personal Projects\Movies\Entities\obj\Debug\net8.0\Entities.csproj.CoreCompileInputs.cache
+C:\Visual Studio\Personal Projects\Movies\Entities\obj\Debug\net8.0\Entities.csproj.CopyComplete
+C:\Visual Studio\Personal Projects\Movies\Entities\obj\Debug\net8.0\Entities.dll
+C:\Visual Studio\Personal Projects\Movies\Entities\obj\Debug\net8.0\refint\Entities.dll
+C:\Visual Studio\Personal Projects\Movies\Entities\obj\Debug\net8.0\Entities.pdb
+C:\Visual Studio\Personal Projects\Movies\Entities\obj\Debug\net8.0\Entities.genruntimeconfig.cache
+C:\Visual Studio\Personal Projects\Movies\Entities\obj\Debug\net8.0\ref\Entities.dll
