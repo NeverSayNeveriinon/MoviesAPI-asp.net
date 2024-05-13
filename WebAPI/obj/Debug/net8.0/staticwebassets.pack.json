@@ -1,0 +1,57 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Visual Studio\\Personal Projects\\Movies\\WebAPI\\wwwroot\\JSONSeed\\seed_genres.json",
+      "PackagePath": "staticwebassets\\JSONSeed\\seed_genres.json"
+    },
+    {
+      "Id": "C:\\Visual Studio\\Personal Projects\\Movies\\WebAPI\\wwwroot\\JSONSeed\\seed_movies.json",
+      "PackagePath": "staticwebassets\\JSONSeed\\seed_movies.json"
+    },
+    {
+      "Id": "C:\\Visual Studio\\Personal Projects\\Movies\\WebAPI\\wwwroot\\JSONSeed\\seed_persons.json",
+      "PackagePath": "staticwebassets\\JSONSeed\\seed_persons.json"
+    },
+    {
+      "Id": "C:\\Visual Studio\\Personal Projects\\Movies\\WebAPI\\wwwroot\\JSONSeed\\seed_series.directors.json",
+      "PackagePath": "staticwebassets\\JSONSeed\\seed_series.directors.json"
+    },
+    {
+      "Id": "C:\\Visual Studio\\Personal Projects\\Movies\\WebAPI\\wwwroot\\JSONSeed\\seed_series.json",
+      "PackagePath": "staticwebassets\\JSONSeed\\seed_series.json"
+    },
+    {
+      "Id": "C:\\Visual Studio\\Personal Projects\\Movies\\WebAPI\\wwwroot\\JSONSeed\\seed_shows.artists.json",
+      "PackagePath": "staticwebassets\\JSONSeed\\seed_shows.artists.json"
+    },
+    {
+      "Id": "C:\\Visual Studio\\Personal Projects\\Movies\\WebAPI\\wwwroot\\JSONSeed\\seed_shows.genres.json",
+      "PackagePath": "staticwebassets\\JSONSeed\\seed_shows.genres.json"
+    },
+    {
+      "Id": "C:\\Visual Studio\\Personal Projects\\Movies\\WebAPI\\wwwroot\\JSONSeed\\seed_shows.writers.json",
+      "PackagePath": "staticwebassets\\JSONSeed\\seed_shows.writers.json"
+    },
+    {
+      "Id": "C:\\Visual Studio\\Personal Projects\\Movies\\WebAPI\\wwwroot\\MoviesApp.xml",
+      "PackagePath": "staticwebassets\\MoviesApp.xml"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.WebAPI.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.WebAPI.props",
+      "PackagePath": "build\\WebAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.WebAPI.props",
+      "PackagePath": "buildMultiTargeting\\WebAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.WebAPI.props",
+      "PackagePath": "buildTransitive\\WebAPI.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

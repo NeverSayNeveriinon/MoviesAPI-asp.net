@@ -1,6 +1,10 @@
-﻿namespace Core.Enums;
+﻿using System.Text.Json.Serialization;
+
+
+namespace Core.Enums;
 
 [Flags]
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum LanguageOptions
 {
     English = 1,

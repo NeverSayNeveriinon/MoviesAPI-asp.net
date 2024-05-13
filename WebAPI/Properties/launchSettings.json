@@ -12,6 +12,7 @@
     "Kestrel http": {
       "commandName": "Project",
       "dotnetRunMessages": true,
+      "launchUrl": "swagger",
       "launchBrowser": true,
       "applicationUrl": "http://localhost:5094",
       "environmentVariables": {
@@ -21,6 +22,7 @@
     "Kestrel https": {
       "commandName": "Project",
       "dotnetRunMessages": true,
+      "launchUrl": "swagger",
       "launchBrowser": true,
       "applicationUrl": "https://localhost:7179",
       "environmentVariables": {
@@ -29,6 +31,7 @@
     },
     "IIS Express": {
       "commandName": "IISExpress",
+      "launchUrl": "swagger",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

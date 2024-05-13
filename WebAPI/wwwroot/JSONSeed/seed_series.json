@@ -1,0 +1,16 @@
+[
+  {
+    "ID": "B8DE724F-9910-4686-B7A0-7F79BE0AE604",
+    "Name": "Mindhunter",
+    "PublishYear": 2017,
+    "CountryName": "USA",
+    "Languages": "English",
+    "IMDBPage": "page11",
+    "IMDBRating": 8.6,
+    "ImagePath": "path11",
+    "PublishChannel": "Netflix",
+    "EpisodesCount": 19,
+    "SeasonsCount": 2,
+    "Summary": "A series about serial killers"
+  }
+]

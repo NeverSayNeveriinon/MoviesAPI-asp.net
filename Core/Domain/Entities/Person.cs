@@ -1,6 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+// using Newtonsoft.Json;
+using System.Text.Json.Serialization;
+
 using Core.Domain.Entities.JoinEntities;
 using Core.Enums;
+using Core.Helpers;
 
 
 namespace Core.Domain.Entities;
@@ -10,11 +14,17 @@ public class Person
     [Key]
     public Guid ID { get; set; }
     
-    [StringLength(30, ErrorMessage = "The 'Person Name' Can't Be More Than 30 Characters")]
-    public string Name { get; set; }
+    [StringLength(30, ErrorMessage = "The 'Person First Name' Can't Be More Than 30 Characters")]
+    public string FirstName { get; set; }
+    
+    [StringLength(30, ErrorMessage = "The 'Person Last Name' Can't Be More Than 30 Characters")]
+    public string LastName { get; set; }
     
     public GenderOptions GenderName { get; set; }
+    
+    [JsonConverter(typeof(DateOnlyJsonConverter))]
     public DateOnly? DateOfBirth { get; set; }
+    
     public JobOptions JobName { get; set; }
     
     [StringLength(800, ErrorMessage = "The 'Summary' Can't Be More Than 800 Characters")]
@@ -27,7 +37,7 @@ public class Person
 
     
     //                                      (Dependent)                (Principal)
-    // With "Movie(person as Director)" ---> Movie 'N'====......----'1' Director(person)
+    // With "MovieDTO(person as Director)" ---> MovieDTO 'N'====......----'1' Director(person)
     public ICollection<Movie>? MoviesDirected { get; } = new List<Movie>();
 
     

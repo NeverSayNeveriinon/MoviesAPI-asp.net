@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using System.Text.Json;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 using Core.Domain.Entities;
 using Core.Domain.Entities.JoinEntities;
 using Core.Domain.IdentityEntities;
+// using Newtonsoft.Json;
+// using Newtonsoft.Json.Converters;
 
 
 namespace Infrastructure.DbContext;
@@ -28,6 +31,82 @@ public class AppDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,Gu
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+
+
+        #region Seed_Data
+
+        // Seed Data for Movies //
+
+        // 'movies seed data json' path
+        string moviesSeed_Path = @"C:\Visual Studio\Personal Projects\Movies\WebAPI\wwwroot\JSONSeed\seed_movies.json";
+
+        // inserting one row in table per 'each MovieDTO object in List'
+        modelBuilder.Entity<Movie>().HasData(JsonToListEntity<Movie>(moviesSeed_Path));  
+        
+        
+        // Seed Data for Series //
+
+        // 'series seed data json' path
+        string seriesSeed_Path = @"C:\Visual Studio\Personal Projects\Movies\WebAPI\wwwroot\JSONSeed\seed_series.json";
+
+        // inserting one row in table per 'each Serial object in List'
+        modelBuilder.Entity<Serial>().HasData(JsonToListEntity<Serial>(seriesSeed_Path));  
+        
+        
+        // Seed Data for Persons //
+
+        // 'persons seed data json' path
+        string personsSeed_Path = @"C:\Visual Studio\Personal Projects\Movies\WebAPI\wwwroot\JSONSeed\seed_persons.json";
+
+        // inserting one row in table per 'each Person object in List'
+        modelBuilder.Entity<Person>().HasData(JsonToListEntity<Person>(personsSeed_Path));    
+        
+        
+        // Seed Data for Genres //
+
+        // 'genres seed data json' path
+        string genresSeed_Path = @"C:\Visual Studio\Personal Projects\Movies\WebAPI\wwwroot\JSONSeed\seed_genres.json";
+
+        // inserting one row in table per 'each Genre object in List'
+        modelBuilder.Entity<Genre>().HasData(JsonToListEntity<Genre>(genresSeed_Path));    
+        
+        
+        // Seed Data for shows.artists //
+
+        // 'shows.artists seed data json' path
+        string shows_artistsSeed_Path = @"C:\Visual Studio\Personal Projects\Movies\WebAPI\wwwroot\JSONSeed\seed_shows.artists.json";
+
+        // inserting one row in table per 'each ShowsArtistsJoin object in List'
+        modelBuilder.Entity<ShowsArtistsJoin>().HasData(JsonToListEntity<ShowsArtistsJoin>(shows_artistsSeed_Path));      
+        
+        
+        // Seed Data for shows.genres //
+
+        // 'shows.genres seed data json' path
+        string shows_genresSeed_Path = @"C:\Visual Studio\Personal Projects\Movies\WebAPI\wwwroot\JSONSeed\seed_shows.genres.json";
+
+        // inserting one row in table per 'each ShowsGenresJoin object in List'
+        modelBuilder.Entity<ShowsGenresJoin>().HasData(JsonToListEntity<ShowsGenresJoin>(shows_genresSeed_Path));      
+        
+        
+        // Seed Data for shows.writers //
+
+        // 'shows.writers seed data json' path
+        string shows_writersSeed_Path = @"C:\Visual Studio\Personal Projects\Movies\WebAPI\wwwroot\JSONSeed\seed_shows.writers.json";
+
+        // inserting one row in table per 'each ShowsWritersJoin object in List'
+        modelBuilder.Entity<ShowsWritersJoin>().HasData(JsonToListEntity<ShowsWritersJoin>(shows_writersSeed_Path));      
+        
+        
+        // Seed Data for series.directors //
+
+        // 'series.directors seed data json' path
+        string series_directorsSeed_Path = @"C:\Visual Studio\Personal Projects\Movies\WebAPI\wwwroot\JSONSeed\seed_series.directors.json";
+
+        // inserting one row in table per 'each SeriesDirectorsJoin object in List'
+        modelBuilder.Entity<SeriesDirectorsJoin>().HasData(JsonToListEntity<SeriesDirectorsJoin>(series_directorsSeed_Path));  
+        
         
         
         // Seed Data for Roles (user,admin) //
@@ -40,9 +119,24 @@ public class AppDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,Gu
                 ConcurrencyStamp = Guid.NewGuid().ToString()}
         ];
         modelBuilder.Entity<ApplicationRole>().HasData(rolesList);
+
+        //
+        // List<MovieDTO> moviesList =
+        // [
+        //     new MovieDTO()
+        //     {
+        //         ID = Guid.NewGuid(),
+        //         Name = "Interstellar",
+        //         PublishYear = 2014,
+        //         Time = TimeOnly.Parse("02:00:00")
+        //     }
+        // ];
+        // modelBuilder.Entity<MovieDTO>().HasData(moviesList);
         
+        #endregion
+
         
-        
+        #region Fluent_API_Configuration
         
         // Fluent API Configuration //
         
@@ -58,11 +152,11 @@ public class AppDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,Gu
         
         // - Relationships
         
-        // Movie 'N'====......----'1' Director(person)
+        // MovieDTO 'N'====......----'1' Director(person)
         modelBuilder.Entity<Movie>()
                     .HasOne(e => e.Director)
                     .WithMany(e => e.MoviesDirected)
-                    .HasForeignKey(e => e.DirectorID).IsRequired().OnDelete(DeleteBehavior.Cascade);
+                    .HasForeignKey(e => e.DirectorID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
 
         
         // Serial 'N'====......----'N' Director(person)
@@ -115,5 +209,26 @@ public class AppDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,Gu
                 r => r.HasOne<Show>(e => e.Show)
                     .WithMany(e => e.ShowsGenresJoin)
                     .HasForeignKey(e => e.ShowID).IsRequired(false).OnDelete(DeleteBehavior.Cascade));
+        
+        
+        #endregion
+    
+    }
+
+    
+    
+    // User-Defined Functions
+    private List<TEntity> JsonToListEntity<TEntity>(string Seed_Path) where TEntity : class
+    {
+        // Read the json file into a string
+        string Seed_Json = File.ReadAllText(Seed_Path);
+
+        // Deserialize the json file to 'a List of TEntity'
+        // List<TEntity> Seed_List = JsonConvert.DeserializeObject<List<TEntity>>(Seed_Json)!;
+        //
+        List<TEntity> Seed_List = JsonSerializer.Deserialize<List<TEntity>>(Seed_Json)!;
+        
+
+        return Seed_List;
     }
 }

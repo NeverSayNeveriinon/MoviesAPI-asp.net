@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Infrastructure.DbContext.Migrations
+namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class Initial : Migration
@@ -78,7 +78,8 @@ namespace Infrastructure.DbContext.Migrations
                 columns: table => new
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     GenderName = table.Column<byte>(type: "tinyint", nullable: false),
                     DateOfBirth = table.Column<DateOnly>(type: "date", nullable: true),
                     JobName = table.Column<byte>(type: "tinyint", nullable: false),
@@ -349,8 +350,123 @@ namespace Infrastructure.DbContext.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("0e764e89-4f56-45d2-9a03-f7ce62e63117"), "a2206894-a34d-4e31-ac47-423cc4a81a49", "Admin", "ADMIN" },
-                    { new Guid("106e1f21-fe34-452b-a9bf-4949e4e40074"), "cae31e1d-0da6-4707-85b3-869674dd6588", "User", "USER" }
+                    { new Guid("9298e4a1-35e7-4702-a299-d1dbd68e18c8"), "7a4a539a-5eea-4fad-b198-cb300b77ddfb", "User", "USER" },
+                    { new Guid("9fa250cf-7c4a-4547-bc3e-793886ee3333"), "7a58dcf2-3449-4827-a268-b253c86ef9de", "Admin", "ADMIN" }
+                });
+
+            migrationBuilder.InsertData(
+                schema: "dbo",
+                table: "Genres",
+                columns: new[] { "ID", "Name", "Summary" },
+                values: new object[,]
+                {
+                    { new Guid("4f803afc-54bd-4ce7-a7c9-5e01801dc1d0"), (byte)9, "a show genre called Action" },
+                    { new Guid("69f4ac8f-dfc1-4597-811b-7a7853540b91"), (byte)2, "a show genre called Thriller" },
+                    { new Guid("81e8f391-5290-49db-a14d-3ddcdf0c0307"), (byte)6, "a show genre called Mystery" },
+                    { new Guid("bf8c2d12-5271-4d54-ad9f-04c655a8657e"), (byte)0, "a show genre called Drama" },
+                    { new Guid("c4535ccd-b984-46b5-a440-de61612684d0"), (byte)8, "a show genre called Sci_Fi" },
+                    { new Guid("e51325d4-34f0-42b0-9ac5-a92fc028da7a"), (byte)7, "a show genre called Crime" }
+                });
+
+            migrationBuilder.InsertData(
+                schema: "dbo",
+                table: "Persons",
+                columns: new[] { "ID", "DateOfBirth", "FirstName", "GenderName", "JobName", "LastName", "Summary" },
+                values: new object[,]
+                {
+                    { new Guid("063565a3-5879-4226-8a73-44105188ccbf"), new DateOnly(1969, 9, 14), "Bong", (byte)0, (byte)2, "Joon-ho", "this is Joon-ho as writer" },
+                    { new Guid("24e28be2-d38a-43a0-8c4f-7112728e82ea"), new DateOnly(1963, 12, 18), "Brad", (byte)0, (byte)0, "Pitt", "this is Pitt" },
+                    { new Guid("26fd500a-2a6b-454c-9d63-090d6208181d"), new DateOnly(1970, 7, 30), "Christopher", (byte)0, (byte)1, "Nolan", "this is Chris Nolan as director" },
+                    { new Guid("63e90859-dbce-4436-877c-f5c4731c1ce2"), new DateOnly(1982, 11, 12), "Anne", (byte)1, (byte)0, "Hathaway", "this is Hathaway" },
+                    { new Guid("73308ea6-f6f4-41c8-928b-ee6a4832357c"), new DateOnly(1970, 7, 30), "Christopher", (byte)0, (byte)2, "Nolan", "this is Chris Nolan as writer" },
+                    { new Guid("76b25d7d-508e-4bc6-bccc-d696e2c08516"), new DateOnly(1964, 8, 14), "Andrew", (byte)0, (byte)2, " Kevin Walker", "this is Walker" },
+                    { new Guid("9c4ee8f2-2919-48a3-9729-fdce1248da14"), new DateOnly(1969, 9, 14), "Bong", (byte)0, (byte)1, "Joon-ho", "this is Joon-ho as director" },
+                    { new Guid("ac0e7576-52cf-42ec-b56e-035b9d72177e"), new DateOnly(1974, 1, 30), "Christian", (byte)0, (byte)0, "Bale", "this is Bale" },
+                    { new Guid("b165c22a-cbb8-4fe9-8697-13d5400379b0"), new DateOnly(1962, 8, 28), "David", (byte)0, (byte)1, "Fincher", "this is Fincher" },
+                    { new Guid("e5f623df-90df-4fab-831a-ce5547812810"), new DateOnly(1976, 6, 6), "Jonathan", (byte)0, (byte)2, "Nolan", "this is Jon Nolan" }
+                });
+
+            migrationBuilder.InsertData(
+                schema: "dbo",
+                table: "Shows",
+                columns: new[] { "ID", "CountryName", "Discriminator", "EpisodesCount", "IMDBPage", "IMDBRating", "ImagePath", "Languages", "Name", "PublishChannel", "PublishYear", "SeasonsCount", "Summary" },
+                values: new object[] { new Guid("b8de724f-9910-4686-b7a0-7f79be0ae604"), "USA", "Serial", 19, "page11", 8.5999999999999996, "path11", 1, "Mindhunter", "Netflix", 2017, 2, "A series about serial killers" });
+
+            migrationBuilder.InsertData(
+                schema: "dbo",
+                table: "SeriesDirectorsJoin",
+                columns: new[] { "DirectorID", "SerialID" },
+                values: new object[] { new Guid("b165c22a-cbb8-4fe9-8697-13d5400379b0"), new Guid("b8de724f-9910-4686-b7a0-7f79be0ae604") });
+
+            migrationBuilder.InsertData(
+                schema: "dbo",
+                table: "Shows",
+                columns: new[] { "ID", "CountryName", "DirectorID", "Discriminator", "IMDBPage", "IMDBRating", "ImagePath", "Languages", "Name", "PublishYear", "Summary", "Time" },
+                values: new object[,]
+                {
+                    { new Guid("00cb4ff8-1cad-4da3-afc6-fd36cda5b1af"), "USA", new Guid("26fd500a-2a6b-454c-9d63-090d6208181d"), "Movie", "page3", 8.4000000000000004, "path3", 1, "Memento", 2000, "A movie about past memories", new TimeOnly(1, 53, 0) },
+                    { new Guid("499ac217-491c-44e6-95a7-ecaaccf98c68"), "USA", new Guid("26fd500a-2a6b-454c-9d63-090d6208181d"), "Movie", "page2", 8.6999999999999993, "path2", 1, "Interstellar", 2014, "A movie about universe", new TimeOnly(2, 49, 0) },
+                    { new Guid("5b0480af-6013-423d-8b20-90a979a87f10"), "USA", new Guid("b165c22a-cbb8-4fe9-8697-13d5400379b0"), "Movie", "page7", 8.8000000000000007, "path7", 1, "Fight Club", 1999, "A movie about ... (just perfect)", new TimeOnly(2, 19, 0) },
+                    { new Guid("5e8887ac-fd4e-46c4-8f16-62e6ac1aad2a"), "USA", new Guid("b165c22a-cbb8-4fe9-8697-13d5400379b0"), "Movie", "page6", 8.5999999999999996, "path6", 1, "Seven", 1995, "A movie about guilt", new TimeOnly(2, 7, 0) },
+                    { new Guid("a95591f5-dd0f-4a4b-9cec-038092363c56"), "USA", new Guid("26fd500a-2a6b-454c-9d63-090d6208181d"), "Movie", "page5", 9.0, "path5", 1, "The Dark Knight", 2008, "A movie about batman", new TimeOnly(2, 32, 0) },
+                    { new Guid("bfce8308-86eb-4bc6-9af6-42eb169d6590"), "USA", new Guid("26fd500a-2a6b-454c-9d63-090d6208181d"), "Movie", "page4", 8.5, "path4", 1, "Prestige", 2006, "A movie about magic", new TimeOnly(2, 10, 0) },
+                    { new Guid("d4a28b46-b993-4da7-a95c-10a649e32e18"), "South Korea", new Guid("9c4ee8f2-2919-48a3-9729-fdce1248da14"), "Movie", "page8", 8.0999999999999996, "path8", 8, "Memories of Murder", 2003, "A movie about murder", new TimeOnly(2, 12, 0) },
+                    { new Guid("fd9de4b8-4334-437e-a398-30dfc8b6c414"), "USA", new Guid("26fd500a-2a6b-454c-9d63-090d6208181d"), "Movie", "page1", 8.8000000000000007, "path1", 1, "Inception", 2010, "A movie about time", new TimeOnly(2, 28, 0) }
+                });
+
+            migrationBuilder.InsertData(
+                schema: "dbo",
+                table: "ShowsArtistsJoin",
+                columns: new[] { "ArtistID", "ShowID" },
+                values: new object[,]
+                {
+                    { new Guid("24e28be2-d38a-43a0-8c4f-7112728e82ea"), new Guid("5b0480af-6013-423d-8b20-90a979a87f10") },
+                    { new Guid("24e28be2-d38a-43a0-8c4f-7112728e82ea"), new Guid("5e8887ac-fd4e-46c4-8f16-62e6ac1aad2a") },
+                    { new Guid("63e90859-dbce-4436-877c-f5c4731c1ce2"), new Guid("499ac217-491c-44e6-95a7-ecaaccf98c68") },
+                    { new Guid("ac0e7576-52cf-42ec-b56e-035b9d72177e"), new Guid("a95591f5-dd0f-4a4b-9cec-038092363c56") },
+                    { new Guid("ac0e7576-52cf-42ec-b56e-035b9d72177e"), new Guid("bfce8308-86eb-4bc6-9af6-42eb169d6590") }
+                });
+
+            migrationBuilder.InsertData(
+                schema: "dbo",
+                table: "ShowsGenresJoin",
+                columns: new[] { "GenreID", "ShowID" },
+                values: new object[,]
+                {
+                    { new Guid("4f803afc-54bd-4ce7-a7c9-5e01801dc1d0"), new Guid("5b0480af-6013-423d-8b20-90a979a87f10") },
+                    { new Guid("4f803afc-54bd-4ce7-a7c9-5e01801dc1d0"), new Guid("a95591f5-dd0f-4a4b-9cec-038092363c56") },
+                    { new Guid("4f803afc-54bd-4ce7-a7c9-5e01801dc1d0"), new Guid("fd9de4b8-4334-437e-a398-30dfc8b6c414") },
+                    { new Guid("69f4ac8f-dfc1-4597-811b-7a7853540b91"), new Guid("00cb4ff8-1cad-4da3-afc6-fd36cda5b1af") },
+                    { new Guid("69f4ac8f-dfc1-4597-811b-7a7853540b91"), new Guid("5b0480af-6013-423d-8b20-90a979a87f10") },
+                    { new Guid("69f4ac8f-dfc1-4597-811b-7a7853540b91"), new Guid("bfce8308-86eb-4bc6-9af6-42eb169d6590") },
+                    { new Guid("69f4ac8f-dfc1-4597-811b-7a7853540b91"), new Guid("d4a28b46-b993-4da7-a95c-10a649e32e18") },
+                    { new Guid("81e8f391-5290-49db-a14d-3ddcdf0c0307"), new Guid("00cb4ff8-1cad-4da3-afc6-fd36cda5b1af") },
+                    { new Guid("81e8f391-5290-49db-a14d-3ddcdf0c0307"), new Guid("5e8887ac-fd4e-46c4-8f16-62e6ac1aad2a") },
+                    { new Guid("c4535ccd-b984-46b5-a440-de61612684d0"), new Guid("499ac217-491c-44e6-95a7-ecaaccf98c68") },
+                    { new Guid("c4535ccd-b984-46b5-a440-de61612684d0"), new Guid("bfce8308-86eb-4bc6-9af6-42eb169d6590") },
+                    { new Guid("c4535ccd-b984-46b5-a440-de61612684d0"), new Guid("fd9de4b8-4334-437e-a398-30dfc8b6c414") },
+                    { new Guid("e51325d4-34f0-42b0-9ac5-a92fc028da7a"), new Guid("5e8887ac-fd4e-46c4-8f16-62e6ac1aad2a") },
+                    { new Guid("e51325d4-34f0-42b0-9ac5-a92fc028da7a"), new Guid("a95591f5-dd0f-4a4b-9cec-038092363c56") },
+                    { new Guid("e51325d4-34f0-42b0-9ac5-a92fc028da7a"), new Guid("d4a28b46-b993-4da7-a95c-10a649e32e18") }
+                });
+
+            migrationBuilder.InsertData(
+                schema: "dbo",
+                table: "ShowsWritersJoin",
+                columns: new[] { "ShowID", "WriterID" },
+                values: new object[,]
+                {
+                    { new Guid("00cb4ff8-1cad-4da3-afc6-fd36cda5b1af"), new Guid("e5f623df-90df-4fab-831a-ce5547812810") },
+                    { new Guid("499ac217-491c-44e6-95a7-ecaaccf98c68"), new Guid("73308ea6-f6f4-41c8-928b-ee6a4832357c") },
+                    { new Guid("499ac217-491c-44e6-95a7-ecaaccf98c68"), new Guid("e5f623df-90df-4fab-831a-ce5547812810") },
+                    { new Guid("5b0480af-6013-423d-8b20-90a979a87f10"), new Guid("76b25d7d-508e-4bc6-bccc-d696e2c08516") },
+                    { new Guid("5e8887ac-fd4e-46c4-8f16-62e6ac1aad2a"), new Guid("76b25d7d-508e-4bc6-bccc-d696e2c08516") },
+                    { new Guid("a95591f5-dd0f-4a4b-9cec-038092363c56"), new Guid("73308ea6-f6f4-41c8-928b-ee6a4832357c") },
+                    { new Guid("a95591f5-dd0f-4a4b-9cec-038092363c56"), new Guid("e5f623df-90df-4fab-831a-ce5547812810") },
+                    { new Guid("bfce8308-86eb-4bc6-9af6-42eb169d6590"), new Guid("73308ea6-f6f4-41c8-928b-ee6a4832357c") },
+                    { new Guid("bfce8308-86eb-4bc6-9af6-42eb169d6590"), new Guid("e5f623df-90df-4fab-831a-ce5547812810") },
+                    { new Guid("d4a28b46-b993-4da7-a95c-10a649e32e18"), new Guid("063565a3-5879-4226-8a73-44105188ccbf") },
+                    { new Guid("fd9de4b8-4334-437e-a398-30dfc8b6c414"), new Guid("73308ea6-f6f4-41c8-928b-ee6a4832357c") }
                 });
 
             migrationBuilder.CreateIndex(

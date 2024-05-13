@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Core.Domain.Entities.JoinEntities;
 using Core.Enums;
+// using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 
 namespace Core.Domain.Entities;
@@ -10,7 +12,7 @@ public abstract class Show
     [Key]
     public Guid ID { get; set; }
     
-    [StringLength(50, ErrorMessage = "The 'Series/Movie Name' Can't Be More Than 50 Characters")]
+    [StringLength(50, ErrorMessage = "The 'Series/MovieDTO Name' Can't Be More Than 50 Characters")]
     public string Name { get; set; }
     
     public int PublishYear { get; set; }
@@ -38,16 +40,19 @@ public abstract class Show
     
     
     // With "Person(person as Writer)" ---> Show 'N'====......----'N' Writer(person)
+    [JsonIgnore]
     public ICollection<Person> Writers { get; } = new List<Person>(); // Navigation to 'Person' entity
     public ICollection<ShowsWritersJoin> ShowsWritersJoin { get; } = new List<ShowsWritersJoin>(); // Navigation to 'ShowsWritersJoin' entity    
     
     
     // With "Person(person as Artist)" ---> Show 'N'----......----'N' Artist(person)
+    [JsonIgnore]
     public ICollection<Person>? Artists { get; } = new List<Person>(); // Navigation to 'Person' entity
     public ICollection<ShowsArtistsJoin>? ShowsArtistsJoin { get; } = new List<ShowsArtistsJoin>(); // Navigation to 'ShowsArtistsJoin' entity  
     
     
     // With "Genre" ---> Show 'N'====......----'N' Genre
+    [JsonIgnore]
     public ICollection<Genre> Genres { get; } = new List<Genre>(); // Navigation to 'Genre' entity
     public ICollection<ShowsGenresJoin> ShowsGenresJoin { get; } = new List<ShowsGenresJoin>(); // Navigation to 'ShowsGenresJoin' entity
     

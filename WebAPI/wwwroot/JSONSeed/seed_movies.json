@@ -1,0 +1,107 @@
+[
+  {
+    "ID": "FD9DE4B8-4334-437E-A398-30DFC8B6C414",
+    "Name": "Inception",
+    "PublishYear": 2010,
+    "CountryName": "USA",
+    "Languages": "English",
+    "IMDBPage": "page1",
+    "IMDBRating": 8.8,
+    "ImagePath": "path1",
+    "Time": "02:28:00",
+    "Summary": "A movie about time",
+    "DirectorID": "26FD500A-2A6B-454C-9D63-090D6208181D"
+  },
+  {
+    "ID": "499AC217-491C-44E6-95A7-ECAACCF98C68",
+    "Name": "Interstellar",
+    "PublishYear": 2014,
+    "CountryName": "USA",
+    "Languages": "English",
+    "IMDBPage": "page2",
+    "IMDBRating": 8.7,
+    "ImagePath": "path2",
+    "Time": "02:49:00",
+    "Summary": "A movie about universe",
+    "DirectorID": "26FD500A-2A6B-454C-9D63-090D6208181D"
+    
+  },
+  {
+    "ID": "5E8887AC-FD4E-46C4-8F16-62E6AC1AAD2A",
+    "Name": "Seven",
+    "PublishYear": 1995,
+    "CountryName": "USA",
+    "Languages": "English",
+    "IMDBPage": "page6",
+    "IMDBRating": 8.6,
+    "ImagePath": "path6",
+    "Time": "02:07:00",
+    "Summary": "A movie about guilt",
+    "DirectorID": "B165C22A-CBB8-4FE9-8697-13D5400379B0"
+  },
+  {
+    "ID": "00CB4FF8-1CAD-4DA3-AFC6-FD36CDA5B1AF",
+    "Name": "Memento",
+    "PublishYear": 2000,
+    "CountryName": "USA",
+    "Languages": "English",
+    "IMDBPage": "page3",
+    "IMDBRating": 8.4,
+    "ImagePath": "path3",
+    "Time": "01:53:00",
+    "Summary": "A movie about past memories",
+    "DirectorID": "26FD500A-2A6B-454C-9D63-090D6208181D"
+  },
+  {
+    "ID": "BFCE8308-86EB-4BC6-9AF6-42EB169D6590",
+    "Name": "Prestige",
+    "PublishYear": 2006,
+    "CountryName": "USA",
+    "Languages": "English",
+    "IMDBPage": "page4",
+    "IMDBRating": 8.5,
+    "ImagePath": "path4",
+    "Time": "02:10:00",
+    "Summary": "A movie about magic",
+    "DirectorID": "26FD500A-2A6B-454C-9D63-090D6208181D"
+  },  
+  {
+    "ID": "A95591F5-DD0F-4A4B-9CEC-038092363C56",
+    "Name": "The Dark Knight",
+    "PublishYear": 2008,
+    "CountryName": "USA",
+    "Languages": "English",
+    "IMDBPage": "page5",
+    "IMDBRating": 9,
+    "ImagePath": "path5",
+    "Time": "02:32:00",
+    "Summary": "A movie about batman",
+    "DirectorID": "26FD500A-2A6B-454C-9D63-090D6208181D"
+  },
+  {
+    "ID": "5B0480AF-6013-423D-8B20-90A979A87F10",
+    "Name": "Fight Club",
+    "PublishYear": 1999,
+    "CountryName": "USA",
+    "Languages": "English",
+    "IMDBPage": "page7",
+    "IMDBRating": 8.8,
+    "ImagePath": "path7",
+    "Time": "02:19:00",
+    "Summary": "A movie about ... (just perfect)",
+    "DirectorID": "B165C22A-CBB8-4FE9-8697-13D5400379B0"
+  },
+  {
+    "ID": "D4A28B46-B993-4DA7-A95C-10A649E32E18",
+    "Name": "Memories of Murder",
+    "PublishYear": 2003,
+    "CountryName": "South Korea",
+    "Languages": "Korean",
+    "IMDBPage": "page8",
+    "IMDBRating": 8.1,
+    "ImagePath": "path8",
+    "Time": "02:12:00",
+    "Summary": "A movie about murder",
+    "DirectorID": "9C4EE8F2-2919-48A3-9729-FDCE1248DA14"
+  }  
+]

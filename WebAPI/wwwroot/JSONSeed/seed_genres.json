@@ -1,0 +1,32 @@
+[
+  {
+    "ID": "BF8C2D12-5271-4D54-AD9F-04C655A8657E",
+    "Name": "Drama",
+    "Summary": "a show genre called Drama"
+  },
+  {
+    "ID": "E51325D4-34F0-42B0-9AC5-A92FC028DA7A",
+    "Name": "Crime",
+    "Summary": "a show genre called Crime"
+  },
+  {
+    "ID": "69F4AC8F-DFC1-4597-811B-7A7853540B91",
+    "Name": "Thriller",
+    "Summary": "a show genre called Thriller"
+  },
+  {
+    "ID": "C4535CCD-B984-46B5-A440-DE61612684D0",
+    "Name": "Sci_Fi",
+    "Summary": "a show genre called Sci_Fi"
+  },
+  {
+    "ID": "81E8F391-5290-49DB-A14D-3DDCDF0C0307",
+    "Name": "Mystery",
+    "Summary": "a show genre called Mystery"
+  },
+  {
+    "ID": "4F803AFC-54BD-4CE7-A7C9-5E01801DC1D0",
+    "Name": "Action",
+    "Summary": "a show genre called Action"
+  }
+]
