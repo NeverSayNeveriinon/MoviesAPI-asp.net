@@ -1,8 +1,8 @@
-using Core.RepositoryContracts;
-using Core.ServiceContracts;
-using Core.Services;
 using Microsoft.EntityFrameworkCore;
 
+using Core.Domain.RepositoryContracts;
+using Core.ServiceContracts;
+using Core.Services;
 using Infrastructure.DbContext;
 using Infrastructure.Repositories;
 
@@ -36,6 +36,7 @@ public class Program
         {
             options.IncludeXmlComments("wwwroot/MoviesApp.xml"); // For Reading the 'XML' comments
         }); 
+        
         
         
         var app = builder.Build();

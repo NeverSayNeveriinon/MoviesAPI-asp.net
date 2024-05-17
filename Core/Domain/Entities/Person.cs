@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-// using Newtonsoft.Json;
 using System.Text.Json.Serialization;
+// using Newtonsoft.Json;
 
 using Core.Domain.Entities.JoinEntities;
 using Core.Enums;

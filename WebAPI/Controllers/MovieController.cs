@@ -1,6 +1,8 @@
-﻿using Core.Domain.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
+
+using Core.DTO.MovieDTO;
 using Core.ServiceContracts;
-using Microsoft.AspNetCore.Mvc;
+
 
 namespace WebAPI.Controllers;
 
@@ -37,9 +39,9 @@ public class MovieController : ControllerBase
     /// <response code="200">The Movies List is successfully returned</response>
     [HttpGet]
     // GET: api/Movie
-    public async Task<ActionResult<IEnumerable<Movie>>> GetMovies()
+    public async Task<ActionResult<IEnumerable<MovieResponse>>> GetMovies()
     {
-        List<Movie> moviesList = await _movieService.GetAllMovies();
+        List<MovieResponse> moviesList = await _movieService.GetAllMovies();
         return Ok(moviesList);
     }
     
@@ -63,7 +65,17 @@ public class MovieController : ControllerBase
     ///        "ImagePath": "path111",
     ///        "Time": "02:29:00",
     ///        "Summary": "A movie about wired relationship",
-    ///        "DirectorID": "B165C22A-CBB8-4FE9-8697-13D5400379B0"
+    ///        "DirectorID": "B165C22A-CBB8-4FE9-8697-13D5400379B0",
+    ///        "WritersID": 
+    ///        [
+    ///            "35468564-B78C-419E-9442-B2078B9E7AEA"
+    ///        ],
+    ///        "ArtistsID": [],
+    ///        "GenresID": 
+    ///        [
+    ///            "69F4AC8F-DFC1-4597-811B-7A7853540B91",
+    ///            "81E8F391-5290-49DB-A14D-3DDCDF0C0307"
+    ///        ]
     ///     }
     /// 
     /// </remarks>
@@ -71,7 +83,7 @@ public class MovieController : ControllerBase
     /// <response code="400">There is sth wrong in Validation of properties</response>
     [HttpPost]
     // Post: api/Movie
-    public async Task<IActionResult> PostMovie(Movie movie)
+    public async Task<IActionResult> PostMovie(MovieRequest movie)
     {
         // No need to do this, because it is done by 'ApiController' attribute in BTS
         // if (!ModelState.IsValid)
@@ -81,7 +93,7 @@ public class MovieController : ControllerBase
         
         await _movieService.AddMovie(movie);
         
-        return CreatedAtAction("GetMovie", new {movieID = movie.ID}, movie);
+        return CreatedAtAction(nameof(GetMovie), new {movieID = movie.ID}, movie);
     }
     
     
@@ -100,9 +112,9 @@ public class MovieController : ControllerBase
     /// <response code="404">A Movie with Given ID has not been found</response>
     [HttpGet("{movieID:guid}")]
     // GET: api/Movie/{movieID}
-    public async Task<ActionResult<Movie>> GetMovie(Guid movieID)
+    public async Task<ActionResult<MovieResponse>> GetMovie(Guid movieID)
     {
-        Movie? movieObject = await _movieService.GetMovieByID(movieID);
+        MovieResponse? movieObject = await _movieService.GetMovieByID(movieID);
         if (movieObject is null)
         {
             return NotFound("notfound:");
@@ -131,7 +143,17 @@ public class MovieController : ControllerBase
     ///        "ImagePath": "path111",
     ///        "Time": "02:29:00",
     ///        "Summary": "A movie about wired relationship and also a wired woman",
-    ///        "DirectorID": "B165C22A-CBB8-4FE9-8697-13D5400379B0"
+    ///        "DirectorID": "B165C22A-CBB8-4FE9-8697-13D5400379B0",
+    ///        "WritersID": 
+    ///        [
+    ///            "35468564-B78C-419E-9442-B2078B9E7AEA"
+    ///        ],
+    ///        "ArtistsID": [],
+    ///        "GenresID": 
+    ///        [
+    ///            "69F4AC8F-DFC1-4597-811B-7A7853540B91",
+    ///            "81E8F391-5290-49DB-A14D-3DDCDF0C0307"
+    ///        ]
     ///     }
     /// 
     /// </remarks>
@@ -140,34 +162,19 @@ public class MovieController : ControllerBase
     /// <response code="404">A Movie with Given ID has not been found</response>
     [HttpPut("{movieID:guid}")]
     // Put: api/Movie/{movieID}
-    public async Task<IActionResult> PutMovie(Guid movieID, Movie movie)
+    public async Task<IActionResult> PutMovie(MovieRequest movie, Guid movieID)
     {
         if (movieID != movie.ID)
         {
             return Problem(detail:"The ID in Url doesn't match with the ID in Body", statusCode:400, title: "Problem With the ID");
         }
 
-        Movie? existingCity = await _movieService.UpdateMovie(movie);
+        MovieResponse? existingCity = await _movieService.UpdateMovie(movie, movieID);
         if (existingCity is null)
         {
             return NotFound("notfound:");
         }
-         
-        // try
-        // {
-        //     await _context.SaveChangesAsync();
-        // }
-        // catch (DbUpdateConcurrencyException e)
-        // {
-        //     if (!(await CityExistsAsync(movieID)))
-        //     {
-        //         return NotFound();
-        //     }
-        //     else
-        //     {
-        //         throw;  
-        //     }
-        // }
+        
         return NoContent();
     }
     
@@ -188,22 +195,12 @@ public class MovieController : ControllerBase
     // Delete: api/Movie/{movieID}
     public async Task<IActionResult> DeleteMovie(Guid movieID)
     {
-        Movie? movieObject = await _movieService.GetMovieByID(movieID);
+        bool? movieObject = await _movieService.DeleteMovie(movieID);
         if (movieObject is null)
         {
-            return NotFound();
+            return NotFound("notfound:");
         }
 
-        await _movieService.DeleteMovie(movieID);
-        
         return NoContent();
     }
-
-    
-    
-    // private async Task<bool> CityExistsAsync(Guid id)
-    // {
-    //     bool? isCity = await _context.Cities?.AnyAsync(city => city.ID == id)!;
-    //     return isCity ?? false;
-    // }
 }

@@ -1,12 +1,10 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-// using Microsoft.Extensions.Logging;
 
 using Core.Domain.Entities;
-using Core.RepositoryContracts;
+using Core.Domain.RepositoryContracts;
 using Infrastructure.DbContext;
-using Infrastructure.Helpers.Extensions;
-
+using Infrastructure.Helpers;
 
 
 namespace Infrastructure.Repositories;
@@ -15,34 +13,19 @@ public class MovieRepository : IMovieRepository
 {
     private readonly AppDbContext _dbContext;
 
-    // private readonly ILogger<MovieRepository>? _logger;
-
     
-    public MovieRepository(AppDbContext dbContext
-        // , ILogger<MovieRepository>? logger
-        )
+    public MovieRepository(AppDbContext dbContext)
     {
         _dbContext = dbContext;
-        
-        // _logger = logger;
     }
    
 
     public async Task<List<Movie>> GetAllMovies(string includeEntities = "")
     {
-        // _logger?.LogInformation("~~~ Started 'GetAllMovies' method of 'Movies' repository ");
-
+        var movies = _dbContext.Movies.IncludeEntities(includeEntities)
+                                      .AsNoTracking();
         
-        // List<MovieDTO> moviesList = await _dbContext.Movies.Include(movie => movie.Director)
-        //                                                    .ToListAsync();
-        
-        // List<MovieDTO> moviesList = await _dbContext.Movies.IncludeEntities<MovieDTO>(includeEntities)
-        //                                                 .ToListAsync();
-        
-        var movies = _dbContext.Movies.IncludeEntities(includeEntities);
         List<Movie> moviesList = await movies.ToListAsync();
-        
-        
         
         return moviesList;
     }
@@ -50,7 +33,8 @@ public class MovieRepository : IMovieRepository
     public async Task<Movie?> GetMovieByID(Guid id,string includeEntities = "")
     {
         Movie? movie = await _dbContext.Movies.IncludeEntities(includeEntities)
-                                                .FirstOrDefaultAsync(movieItem => movieItem.ID == id);
+                                              .AsNoTracking()
+                                              .FirstOrDefaultAsync(movieItem => movieItem.ID == id);
 
         return movie;
     }
@@ -66,17 +50,28 @@ public class MovieRepository : IMovieRepository
     
     public async Task<Movie> UpdateMovie(Movie movie, Movie updatedMovie)
     {
-        movie.ID = updatedMovie.ID;
-        movie.Name = updatedMovie.Name;
-        movie.PublishYear = updatedMovie.PublishYear;
-        movie.CountryName = updatedMovie.CountryName;
-        movie.Summary = updatedMovie.Summary;
-        movie.Languages = updatedMovie.Languages;
-        movie.IMDBPage = updatedMovie.IMDBPage;
-        movie.IMDBRating = updatedMovie.IMDBRating;
-        movie.ImagePath = updatedMovie.ImagePath;
-        movie.Time = updatedMovie.Time;
+        _dbContext.Attach(movie);
+        _dbContext.Entry(movie).State = EntityState.Modified;
+        
+        
+        // Writers Navigation
+        movie.Writers.Clear();
+        movie.ShowsWritersJoin.Clear(); // not needed in fact        
+        _dbContext.Entry(movie).Collection(s => s.ShowsWritersJoin).CurrentValue = updatedMovie.ShowsWritersJoin;
 
+        // Artists Navigation
+        movie.Artists?.Clear();
+        movie.ShowsArtistsJoin?.Clear(); // not needed in fact        
+        _dbContext.Entry(movie).Collection(s => s.ShowsArtistsJoin!).CurrentValue = updatedMovie.ShowsArtistsJoin;
+
+        // Genres Navigation
+        movie.Genres.Clear();
+        movie.ShowsGenresJoin.Clear(); // not needed in fact        
+        _dbContext.Entry(movie).Collection(s => s.ShowsGenresJoin).CurrentValue = updatedMovie.ShowsGenresJoin;
+
+        _dbContext.Entry(movie).CurrentValues.SetValues(updatedMovie);
+        
+        
         await _dbContext.SaveChangesAsync();
         return movie;
     }
@@ -89,10 +84,10 @@ public class MovieRepository : IMovieRepository
         bool result = rowsAffected > 0 ? true : false;
         return result;
     }
+    
 
     public async Task<List<Movie>> GetFilteredMovies(Expression<Func<Movie, bool>> predicate, string includeEntities = "")
     {
-        // _logger?.LogInformation("~~~ Started 'GetFilteredMovies' method of 'Movies' repository ");
 
         List<Movie> moviesList = await _dbContext.Movies.IncludeEntities(includeEntities)
                                                            .Where(predicate)

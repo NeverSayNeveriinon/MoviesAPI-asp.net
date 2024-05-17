@@ -350,8 +350,8 @@ namespace Infrastructure.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("9298e4a1-35e7-4702-a299-d1dbd68e18c8"), "7a4a539a-5eea-4fad-b198-cb300b77ddfb", "User", "USER" },
-                    { new Guid("9fa250cf-7c4a-4547-bc3e-793886ee3333"), "7a58dcf2-3449-4827-a268-b253c86ef9de", "Admin", "ADMIN" }
+                    { new Guid("211d03ae-07fe-4cb4-813e-163f46568b44"), "68296470-E10A-45E8-BA3A-382B5AA093A5", "User", "USER" },
+                    { new Guid("a9c2bc35-61fe-4e60-8158-2bfd6e1478eb"), "6B2DFC5D-F09C-413C-99F3-30C42997A274", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -377,9 +377,10 @@ namespace Infrastructure.Migrations
                     { new Guid("063565a3-5879-4226-8a73-44105188ccbf"), new DateOnly(1969, 9, 14), "Bong", (byte)0, (byte)2, "Joon-ho", "this is Joon-ho as writer" },
                     { new Guid("24e28be2-d38a-43a0-8c4f-7112728e82ea"), new DateOnly(1963, 12, 18), "Brad", (byte)0, (byte)0, "Pitt", "this is Pitt" },
                     { new Guid("26fd500a-2a6b-454c-9d63-090d6208181d"), new DateOnly(1970, 7, 30), "Christopher", (byte)0, (byte)1, "Nolan", "this is Chris Nolan as director" },
+                    { new Guid("35468564-b78c-419e-9442-b2078b9e7aea"), new DateOnly(1971, 2, 24), "Gillian", (byte)1, (byte)2, "Flynn", "this is Flynn" },
                     { new Guid("63e90859-dbce-4436-877c-f5c4731c1ce2"), new DateOnly(1982, 11, 12), "Anne", (byte)1, (byte)0, "Hathaway", "this is Hathaway" },
                     { new Guid("73308ea6-f6f4-41c8-928b-ee6a4832357c"), new DateOnly(1970, 7, 30), "Christopher", (byte)0, (byte)2, "Nolan", "this is Chris Nolan as writer" },
-                    { new Guid("76b25d7d-508e-4bc6-bccc-d696e2c08516"), new DateOnly(1964, 8, 14), "Andrew", (byte)0, (byte)2, " Kevin Walker", "this is Walker" },
+                    { new Guid("76b25d7d-508e-4bc6-bccc-d696e2c08516"), new DateOnly(1964, 8, 14), "Andrew", (byte)0, (byte)2, "Kevin Walker", "this is Walker" },
                     { new Guid("9c4ee8f2-2919-48a3-9729-fdce1248da14"), new DateOnly(1969, 9, 14), "Bong", (byte)0, (byte)1, "Joon-ho", "this is Joon-ho as director" },
                     { new Guid("ac0e7576-52cf-42ec-b56e-035b9d72177e"), new DateOnly(1974, 1, 30), "Christian", (byte)0, (byte)0, "Bale", "this is Bale" },
                     { new Guid("b165c22a-cbb8-4fe9-8697-13d5400379b0"), new DateOnly(1962, 8, 28), "David", (byte)0, (byte)1, "Fincher", "this is Fincher" },

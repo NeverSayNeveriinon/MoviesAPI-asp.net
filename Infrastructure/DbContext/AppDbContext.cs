@@ -1,12 +1,10 @@
-﻿using System.Text.Json;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 using Core.Domain.Entities;
 using Core.Domain.Entities.JoinEntities;
 using Core.Domain.IdentityEntities;
-// using Newtonsoft.Json;
-// using Newtonsoft.Json.Converters;
+using static Infrastructure.Helpers.HelperMethods;
 
 
 namespace Infrastructure.DbContext;
@@ -20,18 +18,15 @@ public class AppDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,Gu
     public virtual DbSet<Person> Persons { get; set; }
     
     
-     // This Constructor with the 'DbContextOptions' parameter must be defined, if not we will get a compiler error
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
-        // this.Set<ShowsWritersJoin>();
     }
 
-
+    
     //
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-
 
 
         #region Seed_Data
@@ -41,7 +36,7 @@ public class AppDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,Gu
         // 'movies seed data json' path
         string moviesSeed_Path = @"C:\Visual Studio\Personal Projects\Movies\WebAPI\wwwroot\JSONSeed\seed_movies.json";
 
-        // inserting one row in table per 'each MovieDTO object in List'
+        // inserting one row in table per 'each Movie object in List'
         modelBuilder.Entity<Movie>().HasData(JsonToListEntity<Movie>(moviesSeed_Path));  
         
         
@@ -113,32 +108,18 @@ public class AppDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,Gu
             
         List<ApplicationRole> rolesList =
         [
-            new ApplicationRole() { Id = Guid.NewGuid(),Name = "User", NormalizedName = "USER", 
-                ConcurrencyStamp = Guid.NewGuid().ToString()},
-            new ApplicationRole() { Id = Guid.NewGuid(),Name = "Admin", NormalizedName = "ADMIN", 
-                ConcurrencyStamp = Guid.NewGuid().ToString()}
+            new ApplicationRole() { Id = Guid.Parse("211D03AE-07FE-4CB4-813E-163F46568B44"),Name = "User", NormalizedName = "USER", 
+                ConcurrencyStamp = "68296470-E10A-45E8-BA3A-382B5AA093A5"},
+            new ApplicationRole() { Id = Guid.Parse("A9C2BC35-61FE-4E60-8158-2BFD6E1478EB"),Name = "Admin", NormalizedName = "ADMIN", 
+                ConcurrencyStamp = "6B2DFC5D-F09C-413C-99F3-30C42997A274"}
         ];
         modelBuilder.Entity<ApplicationRole>().HasData(rolesList);
-
-        //
-        // List<MovieDTO> moviesList =
-        // [
-        //     new MovieDTO()
-        //     {
-        //         ID = Guid.NewGuid(),
-        //         Name = "Interstellar",
-        //         PublishYear = 2014,
-        //         Time = TimeOnly.Parse("02:00:00")
-        //     }
-        // ];
-        // modelBuilder.Entity<MovieDTO>().HasData(moviesList);
+        
         
         #endregion
 
         
         #region Fluent_API_Configuration
-        
-        // Fluent API Configuration //
         
         // -
         modelBuilder.HasDefaultSchema("dbo");
@@ -152,7 +133,7 @@ public class AppDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,Gu
         
         // - Relationships
         
-        // MovieDTO 'N'====......----'1' Director(person)
+        // Movie 'N'====......----'1' Director(person)
         modelBuilder.Entity<Movie>()
                     .HasOne(e => e.Director)
                     .WithMany(e => e.MoviesDirected)
@@ -191,11 +172,11 @@ public class AppDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,Gu
             .WithMany(e => e.ShowsPlayed)
             .UsingEntity<ShowsArtistsJoin>(    
                 l => l.HasOne<Person>(e => e.Artist)
-                    .WithMany(e => e.ShowsArtistsJoin)
-                    .HasForeignKey(e => e.ArtistID).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull),
+                      .WithMany(e => e.ShowsArtistsJoin)
+                      .HasForeignKey(e => e.ArtistID).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull),
                 r => r.HasOne<Show>(e => e.Show)
-                    .WithMany(e => e.ShowsArtistsJoin)
-                    .HasForeignKey(e => e.ShowID).IsRequired(false).OnDelete(DeleteBehavior.Cascade));
+                      .WithMany(e => e.ShowsArtistsJoin)
+                      .HasForeignKey(e => e.ShowID).IsRequired(false).OnDelete(DeleteBehavior.Cascade));
         
         
         // Show 'N'====......----'N' Genre
@@ -204,31 +185,14 @@ public class AppDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,Gu
             .WithMany(e => e.Shows)
             .UsingEntity<ShowsGenresJoin>(    
                 l => l.HasOne<Genre>(e => e.Genre)
-                    .WithMany(e => e.ShowsGenresJoin)
-                    .HasForeignKey(e => e.GenreID).IsRequired().OnDelete(DeleteBehavior.ClientSetNull),
+                      .WithMany(e => e.ShowsGenresJoin)
+                      .HasForeignKey(e => e.GenreID).IsRequired().OnDelete(DeleteBehavior.ClientSetNull),
                 r => r.HasOne<Show>(e => e.Show)
-                    .WithMany(e => e.ShowsGenresJoin)
-                    .HasForeignKey(e => e.ShowID).IsRequired(false).OnDelete(DeleteBehavior.Cascade));
+                      .WithMany(e => e.ShowsGenresJoin)
+                      .HasForeignKey(e => e.ShowID).IsRequired(false).OnDelete(DeleteBehavior.Cascade));
         
         
         #endregion
     
-    }
-
-    
-    
-    // User-Defined Functions
-    private List<TEntity> JsonToListEntity<TEntity>(string Seed_Path) where TEntity : class
-    {
-        // Read the json file into a string
-        string Seed_Json = File.ReadAllText(Seed_Path);
-
-        // Deserialize the json file to 'a List of TEntity'
-        // List<TEntity> Seed_List = JsonConvert.DeserializeObject<List<TEntity>>(Seed_Json)!;
-        //
-        List<TEntity> Seed_List = JsonSerializer.Deserialize<List<TEntity>>(Seed_Json)!;
-        
-
-        return Seed_List;
     }
 }

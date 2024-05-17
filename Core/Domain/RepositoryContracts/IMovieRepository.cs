@@ -3,7 +3,7 @@
 using Core.Domain.Entities;
 
 
-namespace Core.RepositoryContracts;
+namespace Core.Domain.RepositoryContracts;
 
 /// <summary>
 /// Represents data access logic for managing MovieDTO entity

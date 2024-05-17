@@ -1,8 +1,8 @@
 ﻿using System.Globalization;
-// using Newtonsoft.Json;
-
 using System.Text.Json;
 using System.Text.Json.Serialization;
+// using Newtonsoft.Json;
+
 
 namespace Core.Helpers;
 
@@ -20,6 +20,7 @@ public class DateOnlyJsonConverter : JsonConverter<DateOnly>
         writer.WriteStringValue(value.ToString(DateFormat, CultureInfo.InvariantCulture));
     }
 }
+
 public class TimeOnlyJsonConverter : JsonConverter<TimeOnly>
 {
     private const string TimeFormat = "HH:mm:ss.FFFFFFF";

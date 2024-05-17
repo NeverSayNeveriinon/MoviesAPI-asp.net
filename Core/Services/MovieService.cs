@@ -1,7 +1,9 @@
 ﻿using Core.Domain.Entities;
+using Core.Domain.RepositoryContracts;
+using Core.DTO.MovieDTO;
 using Core.Enums;
-using Core.RepositoryContracts;
 using Core.ServiceContracts;
+
 
 namespace Core.Services;
 
@@ -15,10 +17,10 @@ public class MovieService : IMovieService
     }
     
 
-    public async Task<Movie> AddMovie(Movie? movieAddRequest)
+    public async Task<MovieResponse> AddMovie(MovieRequest? movieAddRequest)
     {
         // 'movieAddRequest' is Null //
-        ArgumentNullException.ThrowIfNull(movieAddRequest,"'MovieRequest' object is Null");
+        ArgumentNullException.ThrowIfNull(movieAddRequest,"The 'MovieRequest' object parameter is Null");
         
         // ValidationHelper.ModelValidation(movieAddRequest);
 
@@ -31,38 +33,92 @@ public class MovieService : IMovieService
 
 
         // 'movieAddRequest.Name' is valid and there is no problem //
+        Movie movie = movieAddRequest.ToMovie();
+        Movie movieReturned = await _movieRepository.AddMovie(movie);
 
-        Movie movie = await _movieRepository.AddMovie(movieAddRequest);
-
-        return movie;
+        return movieReturned.ToMovieResponse();
     }   
 
-    public async Task<List<Movie>> GetAllMovies()
+    public async Task<List<MovieResponse>> GetAllMovies()
     {
-        return await _movieRepository.GetAllMovies(includeEntities:"Directors,Writers,Artists,Genres");
+        const string includeEntities = "Director,Writers,Artists,Genres"; 
+        List<Movie> movies = await _movieRepository.GetAllMovies(includeEntities);
+        
+        List<MovieResponse> moviesResponses = movies.Select(movieItem => movieItem.ToMovieResponse()).ToList();
+        return moviesResponses;
     }
 
-    public Task<Movie?> GetMovieByID(Guid? id)
+    public async Task<MovieResponse?> GetMovieByID(Guid? ID)
+    {
+        // if 'id' is null
+        ArgumentNullException.ThrowIfNull(ID,"The Movie'ID' parameter is Null");
+
+        const string includeEntities = "Director,Writers,Artists,Genres"; 
+        Movie? movie = await _movieRepository.GetMovieByID(ID.Value, includeEntities);
+
+        // if 'id' doesn't exist in 'movies list' 
+        if (movie == null)
+        {
+            return null;
+        }
+
+        // if there is no problem
+        MovieResponse movieResponse = movie.ToMovieResponse();
+
+        return movieResponse;;
+    }
+
+    public async Task<MovieResponse?> UpdateMovie(MovieRequest? movieUpdateRequest, Guid? movieID)
+    {
+        // if 'movie ID' is null
+        ArgumentNullException.ThrowIfNull(movieID,"The Movie'ID' parameter is Null");
+        
+        // if 'movieUpdateRequest' is null
+        ArgumentNullException.ThrowIfNull(movieUpdateRequest,"The 'MovieRequest' object parameter is Null");
+
+        
+        // Validation
+        // ValidationHelper.ModelValidation(movieUpdateRequest);
+
+        const string includeEntities = "Director,Writers,Artists,Genres"; 
+        Movie? movie = await _movieRepository.GetMovieByID(movieID.Value, includeEntities);
+        
+        // if 'ID' is invalid (doesn't exist)
+        if (movie == null)
+        {
+            return null;
+        }
+            
+        Movie updatedMovie = await _movieRepository.UpdateMovie(movie, movieUpdateRequest.ToMovie());
+
+        return updatedMovie.ToMovieResponse();
+    }
+
+    public async Task<bool?> DeleteMovie(Guid? ID)
+    {
+        // if 'id' is null
+        ArgumentNullException.ThrowIfNull(ID,"The Movie'ID' parameter is Null");
+
+        Movie? movie = await _movieRepository.GetMovieByID(ID.Value);
+        
+        // if 'ID' is invalid (doesn't exist)
+        if (movie == null) 
+        {
+            return null;
+        }
+    
+        bool result = await _movieRepository.DeleteMovie(movie);
+            
+        return result;
+    }
+    
+    
+    public Task<List<MovieResponse>> GetSearchedMovies(string searchBy, string? searchString)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<Movie>> GetSearchedMovies(string searchBy, string? searchString)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<List<Movie>> GetSortedMovies(List<Movie> allMovies, string sortBy, SortOrderOptions sortOrder)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<Movie?> UpdateMovie(Movie? movieUpdateRequest)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<bool> DeleteMovie(Guid? id)
+    public Task<List<MovieResponse>> GetSortedMovies(List<MovieResponse> allMovies, string sortBy, SortOrderOptions sortOrder)
     {
         throw new NotImplementedException();
     }

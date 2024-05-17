@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Core.Domain.Entities;
+﻿using Core.Domain.Entities;
 using Core.Enums;
+
 
 namespace Core.DTO.MovieDTO;
 
@@ -13,18 +13,17 @@ public class MovieResponse
     public string? Summary { get; set; }
     public LanguageOptions? Languages { get; set; }
     public string? IMDBPage { get; set; }
-    public double? IMDBRating { get; set; }
+    public double? IMDBRating { get; set; } 
     public string? ImagePath { get; set; }
     public TimeOnly Time { get; set; }
     
-    public Guid DirectorID { get; set; }  // Foreign Key to 'Person(Director).ID'
+    public Guid DirectorID { get; set; }  // Foreign Key to 'Person.ID' as Director
+    public string? DirectorName { get; set; } = null;  
     
-    // Additional
-    public string DirectorName { get; set; }  
-
-    // public ICollection<Person> Writers { get; } = new List<Person>(); // Navigation to 'Person' entity
-    // public ICollection<Person>? Artists { get; } = new List<Person>(); // Navigation to 'Person' entity
-    // public ICollection<Genre> Genres { get; } = new List<Genre>(); // Navigation to 'Genre' entity
+    
+    public List<Guid> WritersID { get; set; } = new List<Guid>(); // Foreign Keys to 'Person.ID' as Writers
+    public List<Guid>? ArtistsID { get; set; } = new List<Guid>(); // Foreign Keys to 'Person.ID' as Artists
+    public List<Guid> GenresID { get; set; } = new List<Guid>(); // Foreign Keys to 'Genre.ID'
     
     
 }
@@ -36,6 +35,7 @@ public static class MovieExtensions
         MovieResponse response = new MovieResponse()
         {
             ID = movie.ID,
+            Name = movie.Name,
             PublishYear = movie.PublishYear,
             CountryName = movie.CountryName,
             Summary = movie.Summary,
@@ -44,9 +44,13 @@ public static class MovieExtensions
             IMDBRating = movie.IMDBRating,
             ImagePath = movie.ImagePath,
             Time = movie.Time,
-            DirectorID = movie.DirectorID,
             
-            DirectorName = movie.Director.FirstName + movie.Director.LastName,
+            DirectorName = movie.Director?.FirstName + " " + movie.Director?.LastName,
+            
+            DirectorID = movie.DirectorID,
+            WritersID = movie.Writers.Select(writerItem => writerItem.ID).ToList(),
+            ArtistsID = movie.Artists?.Select(artistItem => artistItem.ID).ToList(),
+            GenresID = movie.Genres.Select(genreItem => genreItem.ID).ToList(),
         };
 
         return response;

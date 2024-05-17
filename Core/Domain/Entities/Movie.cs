@@ -22,7 +22,7 @@ public class Movie : Show
     // With "Person(person as Director)" ---> MovieDTO 'N'====......----'1' Director(person)
     [ForeignKey("Director")]
     public Guid DirectorID { get; set; }  // Foreign Key to 'Person(Director).ID'
-    [JsonIgnore]
+    // [JsonIgnore]
     public Person Director { get; set; } = null!;  // Navigation to 'Person' entity
     
     

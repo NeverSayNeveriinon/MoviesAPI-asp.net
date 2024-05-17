@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240513131517_Initial")]
+    [Migration("20240517224644_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -421,7 +421,7 @@ namespace Infrastructure.Migrations
                             FirstName = "Andrew",
                             GenderName = (byte)0,
                             JobName = (byte)2,
-                            LastName = " Kevin Walker",
+                            LastName = "Kevin Walker",
                             Summary = "this is Walker"
                         },
                         new
@@ -443,6 +443,16 @@ namespace Infrastructure.Migrations
                             JobName = (byte)0,
                             LastName = "Pitt",
                             Summary = "this is Pitt"
+                        },
+                        new
+                        {
+                            ID = new Guid("35468564-b78c-419e-9442-b2078b9e7aea"),
+                            DateOfBirth = new DateOnly(1971, 2, 24),
+                            FirstName = "Gillian",
+                            GenderName = (byte)1,
+                            JobName = (byte)2,
+                            LastName = "Flynn",
+                            Summary = "this is Flynn"
                         });
                 });
 
@@ -526,15 +536,15 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9298e4a1-35e7-4702-a299-d1dbd68e18c8"),
-                            ConcurrencyStamp = "7a4a539a-5eea-4fad-b198-cb300b77ddfb",
+                            Id = new Guid("211d03ae-07fe-4cb4-813e-163f46568b44"),
+                            ConcurrencyStamp = "68296470-E10A-45E8-BA3A-382B5AA093A5",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = new Guid("9fa250cf-7c4a-4547-bc3e-793886ee3333"),
-                            ConcurrencyStamp = "7a58dcf2-3449-4827-a268-b253c86ef9de",
+                            Id = new Guid("a9c2bc35-61fe-4e60-8158-2bfd6e1478eb"),
+                            ConcurrencyStamp = "6B2DFC5D-F09C-413C-99F3-30C42997A274",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

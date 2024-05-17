@@ -17,7 +17,7 @@
             </remarks>
             <response code="200">The Movies List is successfully returned</response>
         </member>
-        <member name="M:WebAPI.Controllers.MovieController.PostMovie(Core.Domain.Entities.Movie)">
+        <member name="M:WebAPI.Controllers.MovieController.PostMovie(Core.DTO.MovieDTO.MovieRequest)">
             <summary>
             Add a New Movie to Movies List
             </summary>
@@ -37,7 +37,17 @@
                    "ImagePath": "path111",
                    "Time": "02:29:00",
                    "Summary": "A movie about wired relationship",
-                   "DirectorID": "B165C22A-CBB8-4FE9-8697-13D5400379B0"
+                   "DirectorID": "B165C22A-CBB8-4FE9-8697-13D5400379B0",
+                   "WritersID": 
+                   [
+                       "35468564-B78C-419E-9442-B2078B9E7AEA"
+                   ],
+                   "ArtistsID": [],
+                   "GenresID": 
+                   [
+                       "69F4AC8F-DFC1-4597-811B-7A7853540B91",
+                       "81E8F391-5290-49DB-A14D-3DDCDF0C0307"
+                   ]
                 }
             
             </remarks>
@@ -58,7 +68,7 @@
             <response code="200">The Movie is successfully found and returned</response>
             <response code="404">A Movie with Given ID has not been found</response>
         </member>
-        <member name="M:WebAPI.Controllers.MovieController.PutMovie(System.Guid,Core.Domain.Entities.Movie)">
+        <member name="M:WebAPI.Controllers.MovieController.PutMovie(Core.DTO.MovieDTO.MovieRequest,System.Guid)">
             <summary>
             Update an Existing Movie Based on Given ID and New Movie Object
             </summary>
@@ -78,7 +88,17 @@
                    "ImagePath": "path111",
                    "Time": "02:29:00",
                    "Summary": "A movie about wired relationship and also a wired woman",
-                   "DirectorID": "B165C22A-CBB8-4FE9-8697-13D5400379B0"
+                   "DirectorID": "B165C22A-CBB8-4FE9-8697-13D5400379B0",
+                   "WritersID": 
+                   [
+                       "35468564-B78C-419E-9442-B2078B9E7AEA"
+                   ],
+                   "ArtistsID": [],
+                   "GenresID": 
+                   [
+                       "69F4AC8F-DFC1-4597-811B-7A7853540B91",
+                       "81E8F391-5290-49DB-A14D-3DDCDF0C0307"
+                   ]
                 }
             
             </remarks>
