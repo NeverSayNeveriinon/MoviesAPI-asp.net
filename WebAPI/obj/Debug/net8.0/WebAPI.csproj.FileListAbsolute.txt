@@ -149,3 +149,4 @@ C:\Visual Studio\Personal Projects\Movies\WebAPI\bin\Debug\net8.0\Swashbuckle.As
 C:\Visual Studio\Personal Projects\Movies\WebAPI\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Visual Studio\Personal Projects\Movies\WebAPI\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Visual Studio\Personal Projects\Movies\WebAPI\obj\Debug\net8.0\WebAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Visual Studio\Personal Projects\Movies\WebAPI\obj\Debug\net8.0\WebAPI.sourcelink.json

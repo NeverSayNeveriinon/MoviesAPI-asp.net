@@ -13,3 +13,4 @@ C:\Visual Studio\Personal Projects\Movies\Infrastructure\obj\Debug\net8.0\Infras
 C:\Visual Studio\Personal Projects\Movies\Infrastructure\obj\Debug\net8.0\refint\Infrastructure.dll
 C:\Visual Studio\Personal Projects\Movies\Infrastructure\obj\Debug\net8.0\Infrastructure.pdb
 C:\Visual Studio\Personal Projects\Movies\Infrastructure\obj\Debug\net8.0\ref\Infrastructure.dll
+C:\Visual Studio\Personal Projects\Movies\Infrastructure\obj\Debug\net8.0\Infrastructure.sourcelink.json

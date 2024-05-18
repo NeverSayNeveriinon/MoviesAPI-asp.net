@@ -32,9 +32,9 @@ public class AppDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,Gu
         #region Seed_Data
 
         // Seed Data for Movies //
-
+        
         // 'movies seed data json' path
-        string moviesSeed_Path = @"C:\Visual Studio\Personal Projects\Movies\WebAPI\wwwroot\JSONSeed\seed_movies.json";
+        string moviesSeed_Path = "../WebAPI/wwwroot/JSONSeed/seed_movies.json";
 
         // inserting one row in table per 'each Movie object in List'
         modelBuilder.Entity<Movie>().HasData(JsonToListEntity<Movie>(moviesSeed_Path));  
@@ -43,7 +43,7 @@ public class AppDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,Gu
         // Seed Data for Series //
 
         // 'series seed data json' path
-        string seriesSeed_Path = @"C:\Visual Studio\Personal Projects\Movies\WebAPI\wwwroot\JSONSeed\seed_series.json";
+        string seriesSeed_Path = "../WebAPI/wwwroot/JSONSeed/seed_series.json";
 
         // inserting one row in table per 'each Serial object in List'
         modelBuilder.Entity<Serial>().HasData(JsonToListEntity<Serial>(seriesSeed_Path));  
@@ -52,7 +52,7 @@ public class AppDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,Gu
         // Seed Data for Persons //
 
         // 'persons seed data json' path
-        string personsSeed_Path = @"C:\Visual Studio\Personal Projects\Movies\WebAPI\wwwroot\JSONSeed\seed_persons.json";
+        string personsSeed_Path = "../WebAPI/wwwroot/JSONSeed/seed_persons.json";
 
         // inserting one row in table per 'each Person object in List'
         modelBuilder.Entity<Person>().HasData(JsonToListEntity<Person>(personsSeed_Path));    
@@ -61,7 +61,7 @@ public class AppDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,Gu
         // Seed Data for Genres //
 
         // 'genres seed data json' path
-        string genresSeed_Path = @"C:\Visual Studio\Personal Projects\Movies\WebAPI\wwwroot\JSONSeed\seed_genres.json";
+        string genresSeed_Path = "../WebAPI/wwwroot/JSONSeed/seed_genres.json";
 
         // inserting one row in table per 'each Genre object in List'
         modelBuilder.Entity<Genre>().HasData(JsonToListEntity<Genre>(genresSeed_Path));    
@@ -70,7 +70,7 @@ public class AppDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,Gu
         // Seed Data for shows.artists //
 
         // 'shows.artists seed data json' path
-        string shows_artistsSeed_Path = @"C:\Visual Studio\Personal Projects\Movies\WebAPI\wwwroot\JSONSeed\seed_shows.artists.json";
+        string shows_artistsSeed_Path = "../WebAPI/wwwroot/JSONSeed/seed_shows.artists.json";
 
         // inserting one row in table per 'each ShowsArtistsJoin object in List'
         modelBuilder.Entity<ShowsArtistsJoin>().HasData(JsonToListEntity<ShowsArtistsJoin>(shows_artistsSeed_Path));      
@@ -79,7 +79,7 @@ public class AppDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,Gu
         // Seed Data for shows.genres //
 
         // 'shows.genres seed data json' path
-        string shows_genresSeed_Path = @"C:\Visual Studio\Personal Projects\Movies\WebAPI\wwwroot\JSONSeed\seed_shows.genres.json";
+        string shows_genresSeed_Path = "../WebAPI/wwwroot/JSONSeed/seed_shows.genres.json";
 
         // inserting one row in table per 'each ShowsGenresJoin object in List'
         modelBuilder.Entity<ShowsGenresJoin>().HasData(JsonToListEntity<ShowsGenresJoin>(shows_genresSeed_Path));      
@@ -88,7 +88,7 @@ public class AppDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,Gu
         // Seed Data for shows.writers //
 
         // 'shows.writers seed data json' path
-        string shows_writersSeed_Path = @"C:\Visual Studio\Personal Projects\Movies\WebAPI\wwwroot\JSONSeed\seed_shows.writers.json";
+        string shows_writersSeed_Path = "../WebAPI/wwwroot/JSONSeed/seed_shows.writers.json";
 
         // inserting one row in table per 'each ShowsWritersJoin object in List'
         modelBuilder.Entity<ShowsWritersJoin>().HasData(JsonToListEntity<ShowsWritersJoin>(shows_writersSeed_Path));      
@@ -97,7 +97,7 @@ public class AppDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,Gu
         // Seed Data for series.directors //
 
         // 'series.directors seed data json' path
-        string series_directorsSeed_Path = @"C:\Visual Studio\Personal Projects\Movies\WebAPI\wwwroot\JSONSeed\seed_series.directors.json";
+        string series_directorsSeed_Path = "../WebAPI/wwwroot/JSONSeed/seed_series.directors.json";
 
         // inserting one row in table per 'each SeriesDirectorsJoin object in List'
         modelBuilder.Entity<SeriesDirectorsJoin>().HasData(JsonToListEntity<SeriesDirectorsJoin>(series_directorsSeed_Path));  
