@@ -13,12 +13,12 @@ public class MinLengthRequiredAttribute: ValidationAttribute
 
     public override bool IsValid(object? value)
     {
-        if (value != null)  
+        if (value == null)
         {
-            var list = value as IList;
-            return list?.Count >= _minElements;
+            return false;
         }
-        return false;
+        var list = value as IList;
+        return list?.Count >= _minElements;
     }
     
     public override string FormatErrorMessage(string name)
