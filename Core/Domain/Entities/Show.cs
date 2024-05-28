@@ -11,7 +11,7 @@ public abstract class Show
     [Key]
     public Guid ID { get; set; }
     
-    [StringLength(50, ErrorMessage = "The 'Series/MovieDTO Name' Can't Be More Than 50 Characters")]
+    [StringLength(50, ErrorMessage = "The 'Series/Movie Name' Can't Be More Than 50 Characters")]
     public string Name { get; set; }
     
     public int PublishYear { get; set; }

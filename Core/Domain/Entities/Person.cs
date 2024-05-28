@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 using Core.Domain.Entities.JoinEntities;
 using Core.Enums;
-using Core.Helpers;
+using Core.Helpers.CustomJsonConvertors;
 
 
 namespace Core.Domain.Entities;
@@ -37,7 +37,7 @@ public class Person
 
     
     //                                      (Dependent)                (Principal)
-    // With "MovieDTO(person as Director)" ---> MovieDTO 'N'====......----'1' Director(person)
+    // With "Movie(person as Director)" ---> Movie 'N'====......----'1' Director(person)
     public ICollection<Movie>? MoviesDirected { get; } = new List<Movie>();
 
     

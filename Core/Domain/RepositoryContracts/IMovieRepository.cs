@@ -6,7 +6,7 @@ using Core.Domain.Entities;
 namespace Core.Domain.RepositoryContracts;
 
 /// <summary>
-/// Represents data access logic for managing MovieDTO entity
+/// Represents data access logic for managing Movie entity
 /// </summary>
 public interface IMovieRepository
 {
@@ -31,7 +31,7 @@ public interface IMovieRepository
     /// <summary>
     /// Adds a movie object to the data store
     /// </summary>
-    /// <param name="movie">MovieDTO object to add</param>
+    /// <param name="movie">Movie object to add</param>
     /// <returns>Returns the movie object after adding it to the table</returns>
     Task<Movie> AddMovie(Movie movie);
 
@@ -39,7 +39,7 @@ public interface IMovieRepository
     /// <summary>
     /// Deletes a movie object based on the given movie object
     /// </summary>
-    /// <param name="movie">MovieDTO object to delete</param>
+    /// <param name="movie">Movie object to delete</param>
     /// <returns>Returns true, if the deletion is successful; otherwise false</returns>
     Task<bool> DeleteMovie(Movie movie);
 
@@ -47,8 +47,8 @@ public interface IMovieRepository
     /// <summary>
     /// Updates a movie object (movie name and other details) based on the given movie object (updatedMovie)
     /// </summary>
-    /// <param name="movie">MovieDTO object to be updated</param>
-    /// <param name="updatedMovie">The updated MovieDTO object to apply to actual movie object</param>
+    /// <param name="movie">Movie object to be updated</param>
+    /// <param name="updatedMovie">The updated Movie object to apply to actual movie object</param>
     /// <returns>Returns the updated movie object</returns>
     Task<Movie> UpdateMovie(Movie movie, Movie updatedMovie);
     
