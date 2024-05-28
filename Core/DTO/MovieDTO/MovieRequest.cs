@@ -20,7 +20,6 @@ public class MovieRequest
     [Required(ErrorMessage = "The 'Publish Year' Can't Be Blank!!!")]
     public int? PublishYear { get; set; }
     
-    [Required(ErrorMessage = "The 'Country Name' Can't Be Blank!!!")]
     [StringLength(40, ErrorMessage = "The 'Country Name' Can't Be More Than 40 Characters")]
     public string? CountryName { get; set; }
     
