@@ -11,26 +11,26 @@ public abstract class Show
     [Key]
     public Guid ID { get; set; }
     
-    [StringLength(50, ErrorMessage = "The 'Series/Movie Name' Can't Be More Than 50 Characters")]
+    [StringLength(50)]
     public string Name { get; set; }
     
     public int PublishYear { get; set; }
     
-    [StringLength(40, ErrorMessage = "The 'Country Name' Can't Be More Than 40 Characters")]
+    [StringLength(40)]
     public string? CountryName { get; set; }
     
-    [StringLength(800, ErrorMessage = "The 'Summary' Can't Be More Than 800 Characters")]
+    [StringLength(800)]
     public string? Summary { get; set; }
     
     public LanguageOptions? Languages { get; set; }
     
-    [StringLength(100, ErrorMessage = "The 'IMDB Page' URL Has Too Much Characters")]
+    [StringLength(100)]
     public string? IMDBPage { get; set; }
     
     [Range(0, 10)]
     public double? IMDBRating { get; set; }
 
-    [StringLength(100, ErrorMessage = "The 'Image' Path Has Too Much Characters")]
+    [StringLength(100)]
     public string? ImagePath { get; set; }
     
     

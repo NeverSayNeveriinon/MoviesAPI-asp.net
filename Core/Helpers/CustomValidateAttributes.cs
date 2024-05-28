@@ -23,6 +23,6 @@ public class MinLengthRequiredAttribute: ValidationAttribute
     
     public override string FormatErrorMessage(string name)
     {
-        return String.Format(this.ErrorMessageString, name);
+        return string.Format(this.ErrorMessageString, name);
     }
 }

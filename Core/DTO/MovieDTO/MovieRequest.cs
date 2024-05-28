@@ -14,26 +14,33 @@ public class MovieRequest
     public Guid? ID { get; set; }
     
     [Required(ErrorMessage = "The 'Movie Name' Can't Be Blank!!!")]
+    [StringLength(50, ErrorMessage = "The 'Series/Movie Name' Can't Be More Than 50 Characters")]
     public string Name { get; set; }
     
     [Required(ErrorMessage = "The 'Publish Year' Can't Be Blank!!!")]
     public int? PublishYear { get; set; }
     
-    // [Required(ErrorMessage = "The 'Country Name' Can't Be Blank!!!")]
+    [Required(ErrorMessage = "The 'Country Name' Can't Be Blank!!!")]
+    [StringLength(40, ErrorMessage = "The 'Country Name' Can't Be More Than 40 Characters")]
     public string? CountryName { get; set; }
     
+    [StringLength(800, ErrorMessage = "The 'Summary' Can't Be More Than 800 Characters")]
     public string? Summary { get; set; }
     
     public LanguageOptions? Languages { get; set; }
     
+    [StringLength(100, ErrorMessage = "The 'IMDB Page' URL Has Too Much Characters")]
     public string? IMDBPage { get; set; }
     
+    [Range(0, 10)]
     public double? IMDBRating { get; set; }
 
+    [StringLength(100, ErrorMessage = "The 'Image' Path Has Too Much Characters")]
     public string? ImagePath { get; set; }
     
     [Required(ErrorMessage = "The 'Time' Can't Be Blank!!!")]
     public TimeOnly? Time { get; set; }
+    
     
     
     [Required(ErrorMessage = "The 'Director' Can't Be not Selected!!!")]
@@ -46,6 +53,7 @@ public class MovieRequest
     
     [MinLengthRequired(1, ErrorMessage = "At Least One 'Genre' Has to Be Selected!!!")]
     public List<Guid?> GenresID { get; set;} // Foreign Keys to 'Genre.ID'
+    
     
     
     public Movie ToMovie()
